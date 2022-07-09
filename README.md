@@ -4,7 +4,7 @@
 Use
 ---
 
-* [gitpod](https://gitpod.io#https://github.com/calaldees/RESTApiTask)
+* [gitpod](https://gitpod.io#https://github.com/MDirvonskis/RESTApiTask)
 * `make run`
 
 Task
@@ -15,12 +15,6 @@ Task
     * [redocly -> openapi.yml](https://redocly.github.io/redoc/?url=https://raw.githubusercontent.com/calaldees/RESTApiTask/main/openapi.yaml)
 * You have been provided with a working complete examples in [expressjs](https://expressjs.com/) and [vuejs](https://vuejs.org/)
 
-### Steps
-1. Clone this repo
-2. Run the demo service to understand the objective `make run`
-3. Run  `make test_server` and `make test_client` to ensure the tests work
-4. Clear the files `app/server.js`,  `app/client.html` and update the gitpod link to your clone at the top of this `README.md`
-5. Commit
 6. You will be supported in stages though the construction of the server and client
     * We will explore the documentation and tutorials together to build up the functionality
 7. Digital Artifact
