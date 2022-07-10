@@ -2,6 +2,8 @@ const express = require('express');
 const app = express();
 const port = 8000;//Port of the server
 
+app.use(express.json());//Allows to read/write json
+
 Attendees=[
   {
   id:"1",//Int Object identifier
@@ -28,8 +30,7 @@ app.get('/', (req, res) => {
 });
 app.get('/List', (req, res) => {
   //Send list objects
-  res.send('Got a POST request')
-  res.send(Attendees).status(200);//success
+  res.send(Attendees.json).status(200);//success
 });
 app.post('/List/', (req, res) => {
   //Check
@@ -43,7 +44,7 @@ app.post('/List/', (req, res) => {
     Attendees.push(req.body)//Add new attendee to list (id, name, notes);
   }  
 });
-app.delete('/List/:userID', (req, res) => {
+app.delete('/List/:id', (req, res) => {
   res.send('Got a DELETE request at /user')
 
   if(findId(((req.body).id)).toString)
