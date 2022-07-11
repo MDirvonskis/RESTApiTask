@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const port = 8000;//Port of the server
+const cors = require('cors');//Need this to run use cors
 
 app.use(express.json());//Allows to read/write json
 app.use(cors());//Enables all cors request
@@ -59,7 +60,7 @@ app.delete('/List/:id', (req, res) => {
   }
 });
 app.listen(port, () => {
-  console.log(`Server port:${port}`)
+  console.log(`Server running on port:${port}`)
 });
 //Error handler needs to be at the bottom..
 app.use((err, req, res, next) => {
