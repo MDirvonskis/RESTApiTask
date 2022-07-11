@@ -8,14 +8,14 @@ app.use(cors());//Enables all cors request
 
 Attendees=[
   {
-  id:"1",//Int Object identifier
-  name:"a",//String
-  notes:"b"//String
+  "id":"1",//Int Object identifier
+  "name":"a",//String
+  "notes":"b"//String
   },
   {
-    id:"2",//Int Object identifier
-    name:"a",//String
-    notes:"b"//String
+    "id":"2",//Int Object identifier
+    "name":"a",//String
+    "notes":"b"//String
   }
 ];
 function findID(id){
@@ -33,8 +33,7 @@ app.get('/', (req, res) => {
   res.send('Server started...').status(200);
 });
 app.get('/List', (req, res) => {//Sending attendees to client.
-  //Send list objects
-  res.send(Attendees.json).status(200);//200 success
+  res.json(Attendees).status(200);
 });
 app.post('/List/', (req, res) => {//Need to check input
   if(findID(req.params.id))
