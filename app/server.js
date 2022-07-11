@@ -3,6 +3,7 @@ const app = express();
 const port = 8000;//Port of the server
 
 app.use(express.json());//Allows to read/write json
+app.use(cors());//Enables all cors request
 
 Attendees=[
   {
@@ -34,15 +35,13 @@ app.get('/List', (req, res) => {//Sending attendees to client.
   //Send list objects
   res.send(Attendees.json).status(200);//200 success
 });
-app.post('/List/', (req, res) => {
-  //Check
-  //Object.keys(req.).toString()
+app.post('/List/', (req, res) => {//Need to check input
   if(findID(req.params.id))
   {
     res.send("Id already exist.").status(302)//302 Found
     //errorlog
   }
-  else{
+  else{//C
     Attendees.push(req.body)//Add new attendee to list (id, name, notes);
   }  
 });
@@ -58,7 +57,14 @@ app.delete('/List/:id', (req, res) => {
     res.send("Item not found").status(404);//404 Missing
     //Log error
   }
-  });
+});
 app.listen(port, () => {
   console.log(`Server port:${port}`)
+});
+//Error handler needs to be at the bottom..
+app.use((err, req, res, next) => {
+
+  //Default error handler template
+  console.error(err.stack)
+  res.status(500).send('Something broke!')
 });
