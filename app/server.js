@@ -7,35 +7,37 @@ app.use(express.json());//Allows to read/write json
 Attendees=[
   {
   id:"1",//Int Object identifier
-  name:"",//String
-  notes:""//String
+  name:"a",//String
+  notes:"b"//String
+  },
+  {
+    id:"2",//Int Object identifier
+    name:"a",//String
+    notes:"b"//String
   }
 ];
-findId(id)
-{
+function findID(id){
   Attendees.filter(function(element){
-    if(element.id == id)//Check if given id is contained in list.
-    {
+    if(element.id == id){
       return true;
     }
-    else
-    {
+    else{
       return false;
     }
-  });
-}
+  })
+};
 app.get('/', (req, res) => {
-  //Send html?  
+  //Send html?
   res.send('Server started...').status(200);
 });
-app.get('/List', (req, res) => {
+app.get('/List', (req, res) => {//Sending attendees to client.
   //Send list objects
-  res.send(Attendees.json).status(200);//success
+  res.send(Attendees.json).status(200);//200 success
 });
 app.post('/List/', (req, res) => {
   //Check
   //Object.keys(req.).toString()
-  if(findId(req.params.id))
+  if(findID(req.params.id))
   {
     res.send("Id already exist.").status(302)//302 Found
     //errorlog
@@ -53,7 +55,7 @@ app.delete('/List/:id', (req, res) => {
     //delete item from list
   }
   else{
-    res.send("Item not found").status(404);
+    res.send("Item not found").status(404);//404 Missing
     //Log error
   }
   });
