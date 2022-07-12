@@ -17,10 +17,10 @@ Express framework features:
         -I added a error handler to prevent crashes.
     * Routing & HTTP Methods: Use representational state transfer (REST), enabling the usages of GET, PUT, POST, DELETE methods.
         -I implemented these methods to request and send a list between the backend and frontend of the server.
-    * Middleware: Express.js provides flexible middleware module, allowing modification of request and response objects. |
-        -I implemented the user of CORS (Cross-origin resource sharing)
+    * Middleware: Express.js provides flexible middleware module, allowing modification of request and response objects.
+        -I implemented the user of CORS (Cross-origin resource sharing), Error handling.
 
-Vue.js framework featurs:
+Vue.js framework features:
     *
         -
     *

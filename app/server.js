@@ -19,7 +19,7 @@ Attendees=[
     "notes":"b"//String
   }
 ];
-function findID(id){
+/*function findID(id){
   Attendees.filter(function(element){
     if(element.id == id){
       return true;
@@ -28,7 +28,7 @@ function findID(id){
       return false;
     }
   })
-};
+};*/
 
 //Routes
 
@@ -36,11 +36,11 @@ app.get('/', (req, res) => {
   //Send html?
   res.send('Server started...').status(200);
 });
-app.get('/List', (req, res) => {//Sending json list.
+app.get('/attendees', (req, res) => {//Sending json list.
   res.json(Attendees).status(200);
 });
-app.post('/ListAdd/:id', (req, res) => {//Add new item to list
-  if(findID(req.params.id))
+app.post('/attendee/', (req, res) => {//Add new item to list
+  /*if(findID(req.params.id))
   {
     res.send("Id already exist.").status(302)//302 Found
     //errorlog
@@ -48,7 +48,12 @@ app.post('/ListAdd/:id', (req, res) => {//Add new item to list
   else{
     res.sendStatus(201);
     Attendees.push(req.body);//Add new attendee to list (id, name, notes);
-  }  
+  }*/
+  if(Object.keys(req.body).sort().toString() =! 'id,name,notes')
+  {
+    return res.send("Fields not found").statusCode(405);
+  }
+    Attendees.push(req.body).statusCode(201);
 });
 app.delete('/ListDelete/:id', (req, res) => {
   res.send('Got a DELETE request at /user')

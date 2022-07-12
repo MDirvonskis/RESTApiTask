@@ -1,1 +1,40 @@
-<?xml version="1.0" encoding="utf-8"?><testsuites><testsuite name="pytest" errors="0" failures="0" skipped="0" tests="7" time="0.245" timestamp="2022-07-09T16:21:53.776288" hostname="e17d7f5c56c1"><testcase classname="test_server" name="test_index" time="0.018" /><testcase classname="test_server" name="test_GET" time="0.007" /><testcase classname="test_server" name="test_POST" time="0.025" /><testcase classname="test_server" name="test_DELETE" time="0.013" /><testcase classname="test_server" name="test_POST_missing_fields" time="0.004" /><testcase classname="test_server" name="test_GET_cors" time="0.005" /><testcase classname="test_server" name="test_OPTIONS_cors" time="0.005" /></testsuite></testsuites>
+<?xml version="1.0" encoding="utf-8"?><testsuites><testsuite name="pytest" errors="0" failures="3" skipped="0" tests="7" time="0.295" timestamp="2022-07-12T10:41:54.768942" hostname="b9ab9a0e56d4"><testcase classname="test_server" name="test_index" time="0.006" /><testcase classname="test_server" name="test_GET" time="0.006" /><testcase classname="test_server" name="test_POST" time="0.021"><failure message="assert 404 == 201&#10; +  where 404 = &lt;Response [404]&gt;.status_code">ENDPOINT = 'http://server:8000'
+
+    def test_POST(ENDPOINT):
+        """
+        POST adds and attendee
+        (GET must be implemented)
+        """
+        _id = random.randint(0, 999999)
+        ATTENDEE = {'id': _id, 'name': f'test {_id}', 'notes': f'some notes {_id}'}
+        response = requests.post(f'{ENDPOINT}/attendee', json=ATTENDEE)
+&gt;       assert response.status_code == 201
+E       assert 404 == 201
+E        +  where 404 = &lt;Response [404]&gt;.status_code
+
+test_server.py:30: AssertionError</failure></testcase><testcase classname="test_server" name="test_DELETE" time="0.009"><failure message="AssertionError: assert 883848 in frozenset({'1', '2'})&#10; +  where frozenset({'1', '2'}) = frozenset(&lt;generator object test_DELETE.&lt;locals&gt;.&lt;genexpr&gt; at 0x7f7fb9fa14d0&gt;)">ENDPOINT = 'http://server:8000'
+
+    def test_DELETE(ENDPOINT):
+        """
+        DELETE removes an attendee
+        (GET and POST must be implemented)
+        """
+        _id = random.randint(0, 999999)
+        ATTENDEE = {'id': _id, 'name': f'test {_id}', 'notes': f'some notes {_id}'}
+        response = requests.post(f'{ENDPOINT}/attendee', json=ATTENDEE)
+    
+        response = requests.get(f'{ENDPOINT}/attendees')
+&gt;       assert _id in frozenset(attendee['id'] for attendee in response.json())
+E       AssertionError: assert 883848 in frozenset({'1', '2'})
+E        +  where frozenset({'1', '2'}) = frozenset(&lt;generator object test_DELETE.&lt;locals&gt;.&lt;genexpr&gt; at 0x7f7fb9fa14d0&gt;)
+
+test_server.py:47: AssertionError</failure></testcase><testcase classname="test_server" name="test_POST_missing_fields" time="0.005"><failure message="assert 404 == 405&#10; +  where 404 = &lt;Response [404]&gt;.status_code">ENDPOINT = 'http://server:8000'
+
+    def test_POST_missing_fields(ENDPOINT):
+        ATTENDEE = {"a": 1}
+        response = requests.post(f'{ENDPOINT}/attendee', json=ATTENDEE)
+&gt;       assert response.status_code == 405
+E       assert 404 == 405
+E        +  where 404 = &lt;Response [404]&gt;.status_code
+
+test_server.py:58: AssertionError</failure></testcase><testcase classname="test_server" name="test_GET_cors" time="0.004" /><testcase classname="test_server" name="test_OPTIONS_cors" time="0.005" /></testsuite></testsuites>

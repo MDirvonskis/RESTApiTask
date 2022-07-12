@@ -5,12 +5,9 @@ info:
   version: '0.1'
   description: |
     # RSPV
-
     The simplest REST API possible with POST, GET and DELETE methods
-
     # Authentication
     As this is a service created as a learning activity, there is no security or authentication.
-
 servers:
   - url: //api.server.test/v1
     description: The deployed url of the api. Currently it is not hosted externally.
@@ -30,6 +27,29 @@ paths:
           content:
             text/html:
                 example: <html><body>Your HTML text</body></html>
+    options:
+      summary: CORS support
+      description: |
+        Enable CORS by returning correct headers
+      tags:
+        - root
+      responses:
+        204:
+          description: Default response for CORS method
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: "*"
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+                example: "GET,HEAD,PUT,PATCH,POST,DELETE"
+            Vary:
+              schema:
+                type: string
+                example: "Access-Control-Request-Headers"
+
 
   '/attendee/':
     post:
@@ -40,6 +60,8 @@ paths:
       requestBody:
         $ref: '#/components/requestBodies/Attendee'
       responses:
+        '405':
+          description: Required fields are not present
         '201':
           description: Attendee created successfully
           content:
