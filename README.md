@@ -13,6 +13,7 @@ Task
 * You are to create an simple RSPV (Répondez s'il vous plaît) webapp with an API
 * You are to implement the [openapi](https://swagger.io/specification/) specification and create a useable web interface using open source frameworks
     * [redocly -> openapi.yml](https://redocly.github.io/redoc/?url=https://raw.githubusercontent.com/calaldees/RESTApiTask/main/openapi.yaml)
+    * https://editor.swagger.io/ + https://raw.githubusercontent.com/calaldees/RESTApiTask/main/openapi.yaml
 * You have been provided with a working complete examples in [expressjs](https://expressjs.com/) and [vuejs](https://vuejs.org/)
 
 6. You will be supported in stages though the construction of the server and client
@@ -48,14 +49,15 @@ curl -v -X OPTIONS http://localhost:8000/
 
 
 ```javascript
-// Open a blank browser tab and bring up devtools (F12)
-// Copy and paste the code below
+// 1.) Open a blank browser tab `about:blank` (blank is important, some websites have security policies)
+// 2.) bring up devtools (F12)
+// 3.) Copy and paste the code below
 //   These are javascript equivalent of `curl` statements
-// Start server api
-// Set `urlAPI` to your server address.
-// TASK: using the devtools console
-//   - add 3 items
-//   - get the item list (explore in devtools)
+// 4.) Start server api
+// 5.) Set `urlAPI` to your server address.
+// 6.) TASK: using the devtools console
+//   - add 3 attendees
+//   - get the attendee list (explore in devtools)
 //   - delete the middle item
 //
 // e.g:
@@ -98,3 +100,28 @@ function deleteAttendee(attendee_id) {
     .catch(err => console.error(err));
 }
 ```
+
+Questions
+---------
+
+* What is a REST Api
+* What is JSON
+* What is the difference between a GET and a POST
+* What are the two components that we are building
+
+* What is an OpenAPI Spec? Why is it important?
+* What are UnitTests? Why are they important?
+* What is the first thing we need to build?
+
+* What is a static file?
+* How do we implement a json GET in express?
+* How are we storing data in our app?
+
+* How we access incoming POST data?
+* How do we add items to a javascript array?
+* How do we filter items from javascript array?
+* How do we access variables from a url_path?
+
+* What are CORS headers?
+
+
