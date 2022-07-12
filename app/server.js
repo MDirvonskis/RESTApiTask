@@ -40,24 +40,15 @@ app.get('/attendees', (req, res) => {//Sending json list.
   res.json(Attendees).status(200);
 });
 app.post('/attendee/', (req, res) => {//Add new item to list
-  /*if(findID(req.params.id))
+  if(Object.keys(req.body).sort().toString() != 'id,name,notes')
   {
-    res.send("Id already exist.").status(302)//302 Found
-    //errorlog
+    return res.statusCode(405).json({message: 'missing fields'});
   }
-  else{
-    res.sendStatus(201);
-    Attendees.push(req.body);//Add new attendee to list (id, name, notes);
-  }*/
-  if(Object.keys(req.body).sort().toString() =! 'id,name,notes')
-  {
-    return res.send("Fields not found").statusCode(405);
-  }
-    Attendees.push(req.body).statusCode(201);
+  Attendees.push(req.body);
+  res.status(201).json(req.body);
 });
 app.delete('/ListDelete/:id', (req, res) => {
-  res.send('Got a DELETE request at /user')
-
+  
   if(findId(((req.body).id)).toString)
   {
     Attendees.delete(req.body);
