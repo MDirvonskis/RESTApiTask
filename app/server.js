@@ -42,7 +42,7 @@ app.get('/attendees', (req, res) => {//Sending json list.
 app.post('/attendee/', (req, res) => {//Add new item to list
   if(Object.keys(req.body).sort().toString() != 'id,name,notes')
   {
-    return res.statusCode(405).json({message: 'missing fields'});
+    return res.status(405).json({message: 'missing fields'});
   }
   Attendees.push(req.body);
   res.status(201).json(req.body);
