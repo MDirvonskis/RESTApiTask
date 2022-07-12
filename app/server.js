@@ -6,6 +6,7 @@ const cors = require('cors');//Need this to run use cors
 app.use(express.json());//Allows to read/write json
 app.use(cors());//Enables all cors request
 
+//List
 Attendees=[
   {
   "id":"1",//Int Object identifier
@@ -28,24 +29,28 @@ function findID(id){
     }
   })
 };
+
+//Routes
+
 app.get('/', (req, res) => {
   //Send html?
   res.send('Server started...').status(200);
 });
-app.get('/List', (req, res) => {//Sending attendees to client.
+app.get('/List', (req, res) => {//Sending json list.
   res.json(Attendees).status(200);
 });
-app.post('/List/', (req, res) => {//Need to check input
+app.post('/ListAdd/:id', (req, res) => {//Add new item to list
   if(findID(req.params.id))
   {
     res.send("Id already exist.").status(302)//302 Found
     //errorlog
   }
-  else{//C
-    Attendees.push(req.body)//Add new attendee to list (id, name, notes);
+  else{
+    res.sendStatus(201);
+    Attendees.push(req.body);//Add new attendee to list (id, name, notes);
   }  
 });
-app.delete('/List/:id', (req, res) => {
+app.delete('/ListDelete/:id', (req, res) => {
   res.send('Got a DELETE request at /user')
 
   if(findId(((req.body).id)).toString)
@@ -58,13 +63,16 @@ app.delete('/List/:id', (req, res) => {
     //Log error
   }
 });
-app.listen(port, () => {
-  console.log(`Server running on port:${port}`)
-});
-//Error handler needs to be at the bottom..
-app.use((err, req, res, next) => {
 
+//Server port
+app.listen(port, () => {
+  console.log(`Server running on port:${port}`);
+});
+
+//Error handler needs to be at the bottom..
+
+app.use((err, req, res, next) => {
   //Default error handler template
-  console.error(err.stack)
-  res.status(500).send('Something broke!')
+  console.error(err.stack);
+  res.status(500).send('Something broke!');
 });
