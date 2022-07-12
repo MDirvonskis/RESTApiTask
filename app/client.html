@@ -14,6 +14,14 @@
       <input name="notes" placeholder="notes" v-model="attendee.notes">
       <button>RSPV</button>
     </form>
+    <h2>List</h2>
+    <ul>
+      <li v-for="aa in attendees">
+        <span>{{aa.id}}</span>
+        <span>{{aa.name}}</span>
+        <span>{{aa.notes}}</span>
+      </li>
+    </ul>
   </div>
 
   <script>
@@ -26,14 +34,27 @@
       return {
         attendee: {
           id: Math.random(),
-          name: "test1",
-          notes: "notes1",
+          name: "",
+          notes: "",
         },        
-        attendees: [{id: 123, name: "test2", notes: "notes2"},],
+        attendees: [],
       }
+    },
+    created(){//Initiates when loaded
+      this.updateAttendees();
     },
     methods: 
     {
+      updateAttendees()
+      {
+        fetch(`${urlAPI}/attendees`, 
+        {
+          method: 'GET',
+        })
+        .then(response => response.json())
+        .then(json => this.attendees = json)
+        .catch(err => console.error(err))
+      },
       addAttendee() 
       {
         fetch(`${urlAPI}/attendee`, 
@@ -44,13 +65,13 @@
         })
         .then(response => response.json())
         .then(json => console.log('addAttendee()', json))
-        .catch(err => console.error(err));
+        .then(()=>this.updateAttendees())
+        .catch(err => console.error(err))
       }
     }
   }).mount('#app')
   </script>
 </body>
-
 </html>
 
 
