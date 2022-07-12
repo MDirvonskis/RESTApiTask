@@ -1,16 +1,57 @@
-<script src="https://unpkg.com/vue@3"></script>
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<link id="favicon" rel="shortcut icon" type="image/png" href="data:image/png;base64,....==" />
+	<title>RSPV App</title>
+  <script src="https://unpkg.com/vue@3"></script>
+</head>
+<body>
+  <h1>RSPV</h1>
+  <div id="app">
+    <form @submit.prevent="addAttendee">
+      <input name="name" placeholder="name" v-model="attendee.name">   
+      <input name="notes" placeholder="notes" v-model="attendee.notes">
+      <button>RSPV</button>
+    </form>
+  </div>
 
-<div id="app">{{ message }}</div>
-
-<script>
-  const { createApp } = Vue
+  <script>
+  const { createApp } = Vue;
+  const urlAPI = '';
 
   createApp({
-    data() {
+    data()
+    {
       return {
-        //Code here?
-        message: 'Hello Vue!'
+        attendee: {
+          id: Math.random(),
+          name: "test1",
+          notes: "notes1",
+        },        
+        attendees: [{id: 123, name: "test2", notes: "notes2"},],
+      }
+    },
+    methods: 
+    {
+      addAttendee() 
+      {
+        fetch(`${urlAPI}/attendee`, 
+        {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify(this.attendee),
+        })
+        .then(response => response.json())
+        .then(json => console.log('addAttendee()', json))
+        .catch(err => console.error(err));
       }
     }
   }).mount('#app')
-</script>
+  </script>
+</body>
+
+</html>
+
+
+

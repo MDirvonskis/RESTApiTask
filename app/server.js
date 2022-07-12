@@ -34,7 +34,7 @@ Attendees=[
 
 app.get('/', (req, res) => {
   //Send html?
-  res.send('Server started...').status(200);
+  res.sendFile('client.html', {root: __dirname});
 });
 app.get('/attendees', (req, res) => {//Sending json list.
   res.json(Attendees).status(200);

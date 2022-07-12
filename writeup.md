@@ -28,3 +28,15 @@ Vue.js framework features:
     *
         -
 
+Java: Has inline functions which are associated with '.then' function which executes in asynchronise 
+Language FETCH
+inline functions
+.then anon function
+.then can be executed asynch (paralisation)
+3 different ways to define a function
+
+funtion are seen as 1st class :java
+
+Vue.js
+Vue.js uses states to separate code from the layout.
+you can bind html to data model, creating a two way mapping between raw htlm   
