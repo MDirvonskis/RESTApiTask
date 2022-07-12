@@ -47,9 +47,12 @@ app.post('/attendee/', (req, res) => {//Add new item to list
   Attendees.push(req.body);
   res.status(201).json(req.body);
 });
-app.delete('/ListDelete/:id', (req, res) => {
-  
-  if(findId(((req.body).id)).toString)
+app.delete('/attendee/:id', (req, res) => {
+  const id = parseFloat(req.params.id);//Store id from request into 'id'
+  Attendees = [...Attendees.filter((aList) => aList.id != id)];
+  // .filter: Make new array with the name of 'aList'
+  res.status(204).json({});
+  /*if(findId(((req.body).id)).toString)
   {
     Attendees.delete(req.body);
     //delete item from list
@@ -57,7 +60,7 @@ app.delete('/ListDelete/:id', (req, res) => {
   else{
     res.send("Item not found").status(404);//404 Missing
     //Log error
-  }
+  }*/
 });
 
 //Server port
