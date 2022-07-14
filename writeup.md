@@ -28,7 +28,7 @@ app.use((err, req, res, next) => {
 By having these functions like (`app.`), we are able to reduce that amount of code we have to manually program.
 
 ## Another feature of express.js is has Routing and HTTP Methods. 
-Express use REST (representational state transfer), which provides the use of GET, PUT, POST, DELETE methods. I implemented these methods to request and respond to the client side.
+Express use REST (representational state transfer), which provides the use of GET, PUT, POST, DELETE methods. I implemented these methods to request and respond to the client side network.
 ```
 app.get('/attendees', (req, res) => {//Sending json list.
   ...
@@ -36,13 +36,14 @@ app.get('/attendees', (req, res) => {//Sending json list.
 app.post('/attendee/', (req, res) => {//Add new item to list
   ...
 });
-app.delete('/attendee/:id', (req, res) => {
+app.delete('/attendee/:id', (req, res) => {//Retrieving a id from a delete fetch
   ...
 });
 ```
 # Vue.js
 
 ## The first feature of Vue.js framework is that you can bind html to the data model, creating a two way mapping when utilizing 'v-models'.
+I'm mapping id and notes to user input. 
 ```
 <input name="name" placeholder="name" v-model="attendee.name">   
 <input name="notes" placeholder="notes" v-model="attendee.notes">
@@ -81,6 +82,7 @@ updateAttendees()
         .catch(err => console.error(err))
       }
 ```
+This keeps populating the list on each refresh
 ## Additionally, Vue.js contains directives like 'v-else', 'v-for', 'v-if' which interacts with DOM elements.
 It takes attendees and output each json object contained into a list.
 ```
